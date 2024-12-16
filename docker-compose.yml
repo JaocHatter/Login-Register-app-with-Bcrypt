@@ -1,0 +1,31 @@
+services:
+
+  db:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data 
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=app_db
+    networks:
+      - network1
+  
+  app:
+    build:
+      context: .
+    ports:
+      - 5000:5000
+    networks:
+      - network1
+
+networks:
+  network1: 
+    driver: bridge
+
+volumes:
+  db_data:
+  
+
