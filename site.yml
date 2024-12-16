@@ -1,0 +1,11 @@
+- name: Automatize everything
+  hosts: all
+  become: yes
+  become_method: sudo
+  remote_user: vagrant
+  vars:
+    arch_mapping:
+      x86_64: amd64
+      aarch64: arm64
+  tasks:
+    - import_tasks: ansible/deploy.yml
